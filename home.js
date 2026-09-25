@@ -1,0 +1,17 @@
+const labels={released:'منتشرشده',development:'در حال توسعه',planned:'در مرحله طراحی'};
+const grid=document.getElementById('project-grid'),search=document.getElementById('app-search');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const img=v=>typeof v==='string'&&(/^(?:https:\/\/|\/?assets\/uploads\/)/.test(v))?v:'';
+const apk=v=>typeof v==='string'&&/^https:\/\/\S+\.apk(?:\?\S*)?$/i.test(v)?v:'';
+let apps=[],status='all';
+function card(p,i){const url='app.html?id='+encodeURIComponent(p.id),icon=img(p.icon),shot=img(p.screenshots?.[0]),download=p.status==='released'?apk(p.apk_url):'';
+return `<article class="project-card market-card ${i%2?'project-violet':'project-mint'}"><a class="market-cover" href="${url}" aria-label="جزئیات ${esc(p.title)}">${shot?`<img loading="lazy" src="${esc(shot)}" alt="نمایی از ${esc(p.title)}">`:'<div class="market-cover-placeholder"><span class="market-line one"></span><span class="market-line two"></span><span class="market-line three"></span></div>'}<span class="market-cover-number">0${i+1}</span></a><div class="market-card-body"><div class="market-card-heading"><div class="market-app-icon">${icon?`<img loading="lazy" src="${esc(icon)}" alt="">`:esc(p.title.slice(0,1))}</div><div class="market-app-title"><h3><a href="${url}">${esc(p.title)}</a></h3><small>${esc(p.category)}</small></div></div><p>${esc(p.summary)}</p><div class="tags">${(p.tags||[]).slice(0,3).map(t=>`<span>${esc(t)}</span>`).join('')}</div><div class="market-card-actions"><span class="status status-${esc(p.status)}"><i></i>${labels[p.status]||'در مرحله طراحی'}</span><div><a class="market-more" href="${url}">جزئیات ←</a>${download?`<a class="market-download" href="${esc(download)}" rel="noopener noreferrer">دانلود ↓</a>`:''}</div></div></div></article>`}
+function render(){const q=search?.value.toLocaleLowerCase('fa').trim()||'';const list=apps.filter(p=>(status==='all'||p.status===status)&&[p.title,p.category,p.summary,...(p.tags||[])].join(' ').toLocaleLowerCase('fa').includes(q));if(grid)grid.innerHTML=list.length?list.map(card).join(''):'<p class="no-projects">برنامه‌ای برای نمایش پیدا نشد.</p>'}
+search?.addEventListener('input',render);
+document.querySelectorAll('.filter-pill').forEach(b=>b.addEventListener('click',()=>{status=b.dataset.status||'all';document.querySelectorAll('.filter-pill').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});render()}));
+const menu=document.getElementById('menu-button'),nav=document.getElementById('nav-links');
+menu?.addEventListener('click',()=>{const on=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!on));nav?.classList.toggle('open',!on)});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu?.setAttribute('aria-expanded','false');nav?.classList.remove('open')}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav?.classList.remove('open');menu?.setAttribute('aria-expanded','false')}});
+window.addEventListener('scroll',()=>document.querySelector('.site-header')?.classList.toggle('scrolled',scrollY>12),{passive:true});
+(async()=>{try{const r=await fetch('data/apps.json',{cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);const d=await r.json();apps=Array.isArray(d)?d:[];render()}catch{if(grid)grid.innerHTML='<p class="no-projects">بارگذاری برنامه‌ها ممکن نشد.</p>'}})();

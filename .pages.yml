@@ -1,0 +1,54 @@
+media:
+  input: assets/uploads
+  output: /assets/uploads
+  rename: safe
+  extensions: [webp, png, jpg, jpeg]
+content:
+  - name: apps
+    label: اپلیکیشن‌ها
+    type: collection
+    path: content/apps
+    format: json
+    filename: "{id}.json"
+    view:
+      primary: title
+      fields: [title, status, featured]
+      sort: [title]
+      search: [title, category]
+    fields:
+      - { name: id, label: شناسه انگلیسی, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      - { name: title, label: نام برنامه, type: string, required: true }
+      - { name: category, label: دسته‌بندی, type: string, required: true }
+      - { name: summary, label: معرفی کوتاه, type: text, required: true }
+      - { name: description, label: معرفی کامل, type: text, required: true }
+      - name: status
+        label: وضعیت
+        type: select
+        required: true
+        options:
+          values:
+            - { name: planned, label: در مرحله طراحی }
+            - { name: development, label: در حال توسعه }
+            - { name: released, label: منتشرشده }
+      - { name: featured, label: ویژه, type: boolean }
+      - name: icon
+        label: آیکون
+        type: image
+        options:
+          extensions: [webp, png, jpg, jpeg]
+      - name: screenshots
+        label: تصاویر برنامه
+        type: image
+        options:
+          multiple: { max: 12 }
+          extensions: [webp, png, jpg, jpeg]
+      - { name: tags, label: برچسب‌ها, type: string, list: true }
+      - { name: features, label: امکانات, type: string, list: true }
+      - { name: version, label: نسخه, type: string }
+      - { name: size_mb, label: حجم APK, type: string }
+      - { name: min_android, label: حداقل اندروید, type: string }
+      - { name: last_updated, label: تاریخ به‌روزرسانی, type: string }
+      - { name: changelog, label: تغییرات نسخه, type: text }
+      - { name: apk_url, label: لینک مستقیم APK, type: string }
+      - { name: bazaar_url, label: لینک کافه‌بازار, type: string }
+      - { name: myket_url, label: لینک مایکت, type: string }

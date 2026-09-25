@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#080d19" />
+  <meta name="description" content="معرفی و دانلود مستقیم اپلیکیشن‌های اندرویدی محمد رئیسی؛ اسکرین‌شات‌ها و نظرات کاربران" />
+  <title>جزئیات اپلیکیشن | محمد رئیسی</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="market.css" />
+  <script src="site-config.js"></script>
+  <script type="module" src="detail.js"></script>
+</head>
+<body class="detail-body">
+  <a href="#main" class="skip">رفتن به محتوای اصلی</a>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header scrolled"><nav class="nav wrap" aria-label="منوی اصلی"><a class="brand" href="index.html" aria-label="صفحه اصلی"><span class="brand-symbol">&lt;/&gt;</span><span>محمد<span class="brand-dot">.</span></span></a><div class="detail-nav-links"><a href="index.html#projects">اپلیکیشن‌ها</a><a href="index.html#about">درباره من</a></div><a class="nav-cta" href="https://github.com/MohammadRaisi9" target="_blank" rel="noopener noreferrer">گیت‌هاب ↗</a></nav></header>
+  <main id="main" class="detail-main wrap">
+    <a href="index.html#projects" class="detail-back">→ بازگشت به اپلیکیشن‌ها</a>
+    <div id="app-loading" class="detail-loading" role="status">در حال بارگذاری اطلاعات برنامه…</div>
+    <div id="app-content" hidden>
+      <section class="app-hero-card" aria-label="معرفی برنامه">
+        <div id="detail-icon" class="detail-icon" aria-hidden="true">م</div>
+        <div class="app-hero-info"><span id="detail-category" class="category-label"></span><h1 id="detail-title"></h1><p id="detail-summary"></p><div id="detail-tags" class="tags"></div><div id="detail-rating" class="detail-rating"><span aria-hidden="true">☆</span> هنوز امتیازی ثبت نشده</div></div>
+        <div class="app-downloads" id="detail-downloads"></div>
+      </section>
+      <div class="app-content-grid"><div class="app-main-column">
+        <section class="detail-panel" id="screenshots-section"><div class="panel-heading"><h2>تصاویر برنامه</h2><span>اسکرین‌شات‌های واقعی</span></div><div id="screenshot-gallery" class="screenshot-gallery"></div></section>
+        <section class="detail-panel"><div class="panel-heading"><h2>درباره برنامه</h2></div><p id="detail-description" class="long-description"></p><h3>امکانات اصلی</h3><ul id="feature-list" class="feature-list"></ul></section>
+        <section class="detail-panel" id="reviews"><div class="panel-heading"><h2>نظرهای کاربران</h2><span id="review-count"></span></div>
+          <div id="review-summary" class="review-summary"><span>☆</span> هنوز نظری ثبت نشده است.</div>
+          <div class="review-submit-card"><h3>تجربه‌ات رو با بقیه به اشتراک بذار</h3><p>برای جلوگیری از نظرهای جعلی، ثبت نظر با تأیید ایمیل انجام می‌شود. نظرها پیش از انتشار بررسی می‌شوند.</p>
+            <div id="review-setup-notice" class="review-message">بخش نظرات پس از اتصال سرویس فعال خواهد شد.</div>
+            <form id="email-form" class="email-form" hidden><label for="login-email">ایمیل خودت را وارد کن</label><div class="inline-fields"><input id="login-email" type="email" placeholder="you@example.com" autocomplete="email" required /><button class="btn btn-primary" type="submit">دریافت لینک ورود</button></div></form>
+            <div id="auth-state" class="auth-state" hidden></div>
+            <form id="review-form" class="review-form" hidden>
+              <label for="review-name">نام نمایشی</label><input id="review-name" minlength="2" maxlength="60" required autocomplete="nickname" placeholder="نامی که کنار نظرت دیده می‌شود" />
+              <label for="review-rating">امتیاز به برنامه</label><select id="review-rating" required><option value="">انتخاب کن</option><option value="5">★★★★★ عالی</option><option value="4">★★★★☆ خوب</option><option value="3">★★★☆☆ متوسط</option><option value="2">★★☆☆☆ ضعیف</option><option value="1">★☆☆☆☆ خیلی ضعیف</option></select>
+              <label for="review-body">نظر تو</label><textarea id="review-body" minlength="10" maxlength="2000" required rows="4" placeholder="چه چیزی رو دوست داشتی و چه چیزی بهتر می‌شه؟"></textarea>
+              <button type="submit" class="btn btn-primary">ثبت نظر برای بررسی ←</button>
+            </form>
+            <p id="review-feedback" role="status" aria-live="polite"></p>
+          </div><div id="review-list" class="review-list"><p class="review-empty">هنوز نظری برای این برنامه ثبت نشده است.</p></div>
+        </section>
+      </div><aside class="app-side-column"><section class="detail-panel sticky-info"><div class="panel-heading"><h2>اطلاعات برنامه</h2></div><dl id="app-info" class="app-info"></dl><h3>نصب روی اندروید</h3><p class="install-guide">پس از دریافت فایل APK، آن را باز کن و در صورت درخواست، اجازه نصب از منبع دانلود را در تنظیمات اندروید صادر کن. دانلود خودکار به معنی نصب خودکار نیست.</p></section></aside></div>
+    </div>
+  </main>
+  <footer class="footer wrap"><a class="brand" href="index.html"><span class="brand-symbol">&lt;/&gt;</span><span>محمد<span class="brand-dot">.</span></span></a><p>محمد رئیسی · معلم و توسعه‌دهنده اندروید</p><a href="index.html#projects" class="back-top" aria-label="بازگشت به برنامه‌ها">→</a></footer>
+  <dialog id="image-dialog" class="image-dialog" aria-label="نمایش تصویر برنامه"><button type="button" id="dialog-close" class="dialog-close" aria-label="بستن تصویر">×</button><img id="dialog-image" alt="" /></dialog>
+</body>
+</html>
