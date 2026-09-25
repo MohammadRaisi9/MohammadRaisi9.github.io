@@ -1,8 +1,16 @@
 media:
-  input: assets/uploads
-  output: /assets/uploads
-  rename: safe
-  extensions: [webp, png, jpg, jpeg]
+  - name: images
+    label: تصاویر و آیکون‌ها
+    input: assets/uploads
+    output: /assets/uploads
+    rename: safe
+    extensions: [webp, png, jpg, jpeg]
+  - name: apks
+    label: فایل‌های APK کم‌حجم
+    input: assets/apks
+    output: /assets/apks
+    rename: safe
+    extensions: [apk]
 content:
   - name: apps
     label: اپلیکیشن‌ها
@@ -16,11 +24,11 @@ content:
       sort: [title]
       search: [title, category]
     fields:
-      - { name: id, label: شناسه انگلیسی, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      - { name: id, label: شناسه انگلیسی یکتا, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
       - { name: title, label: نام برنامه, type: string, required: true }
       - { name: category, label: دسته‌بندی, type: string, required: true }
       - { name: summary, label: معرفی کوتاه, type: text, required: true }
-      - { name: description, label: معرفی کامل, type: text, required: true }
+      - { name: description, label: توضیحات کامل, type: text, required: true }
       - name: status
         label: وضعیت
         type: select
@@ -30,25 +38,43 @@ content:
             - { name: planned, label: در مرحله طراحی }
             - { name: development, label: در حال توسعه }
             - { name: released, label: منتشرشده }
-      - { name: featured, label: ویژه, type: boolean }
+      - { name: featured, label: نمایش در ابتدای فهرست, type: boolean }
       - name: icon
-        label: آیکون
+        label: آیکون برنامه
         type: image
         options:
+          media: images
           extensions: [webp, png, jpg, jpeg]
       - name: screenshots
-        label: تصاویر برنامه
+        label: اسکرین‌شات‌ها
         type: image
         options:
+          media: images
           multiple: { max: 12 }
           extensions: [webp, png, jpg, jpeg]
       - { name: tags, label: برچسب‌ها, type: string, list: true }
       - { name: features, label: امکانات, type: string, list: true }
-      - { name: version, label: نسخه, type: string }
-      - { name: size_mb, label: حجم APK, type: string }
+      - { name: version, label: شماره نسخه, type: string }
+      - { name: size_mb, label: حجم مگابایت, type: string }
       - { name: min_android, label: حداقل اندروید, type: string }
-      - { name: last_updated, label: تاریخ به‌روزرسانی, type: string }
+      - { name: last_updated, label: آخرین به‌روزرسانی, type: string }
       - { name: changelog, label: تغییرات نسخه, type: text }
-      - { name: apk_url, label: لینک مستقیم APK, type: string }
+      - name: apk_file
+        label: بارگذاری APK مستقیم (زیر 50 مگابایت)
+        type: file
+        options:
+          media: apks
+          extensions: [apk]
+      - name: apk_url
+        label: لینک مستقیم APK بزرگ از GitHub Releases
+        type: string
       - { name: bazaar_url, label: لینک کافه‌بازار, type: string }
       - { name: myket_url, label: لینک مایکت, type: string }
+  - name: site_settings
+    label: تنظیمات سایت و نظرات
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: supabase_url, label: نشانی عمومی پروژه Supabase, type: string }
+      - { name: supabase_publishable_key, label: کلید عمومی Supabase (sb_publishable), type: string }

@@ -2,7 +2,7 @@ import {setupComments} from './comments.js';
 const $=id=>document.getElementById(id),slug=new URLSearchParams(location.search).get('id')||'';
 const safeImg=v=>typeof v==='string'&&(/^(?:https:\/\/|\/?assets\/uploads\/)/.test(v))?v:'';
 const ext=v=>typeof v==='string'&&/^https:\/\/\S+$/.test(v)?v:'';
-const apk=v=>ext(v)&&/\.apk(?:\?\S*)?$/i.test(v)?v:'';
+const apk=v=>typeof v==='string'&&(/^https:\/\/\S+\.apk(?:\?\S*)?$/i.test(v)||/^\/assets\/apks\/[\w.-]+\.apk$/i.test(v))?v:'';
 function render(p){document.title=p.title+' | محمد رئیسی';$('detail-title').textContent=p.title;$('detail-category').textContent=p.category;$('detail-summary').textContent=p.summary;$('detail-description').textContent=p.description||p.summary;
 const icon=safeImg(p.icon);if(icon){const image=document.createElement('img');image.src=icon;image.alt='';$('detail-icon').replaceChildren(image)}else $('detail-icon').textContent=p.title[0];
 for(const t of p.tags||[]){const el=document.createElement('span');el.textContent=t;$('detail-tags').append(el)}
